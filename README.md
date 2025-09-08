@@ -127,6 +127,7 @@ curl -N -H "Accept: text/event-stream" \
    
 ---
 ## 🗂 Project Structure
+```
 ai-bot/
 ├─ backend/                     # FastAPI backend 
 │  ├─ app.py                    # Main API routes 
@@ -143,7 +144,7 @@ ai-bot/
 ├─ docker-compose.yml           # Postgres setup
 ├─ env.example                  # Env template
 └─ .github/workflows/deploy.yml # CI/CD workflow
-
+```
 ---
 ## 🎯 Assignment Requirements
 
