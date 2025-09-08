@@ -1,0 +1,13 @@
+[Unit]
+Description=NGINX reverse proxy for Chatbot
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/ubuntu/chatbot-deploy
+ExecStart=/usr/bin/docker compose -f docker-compose.deploy.yml up -d
+ExecStop=/usr/bin/docker compose -f docker-compose.deploy.yml down
+
+[Install]
+WantedBy=multi-user.target
