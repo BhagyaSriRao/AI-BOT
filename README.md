@@ -129,21 +129,23 @@ curl -N -H "Accept: text/event-stream" \
 ## 🗂 Project Structure
 ```
 ai-bot/
-├─ backend/                     # FastAPI backend 
-│  ├─ app.py                    # Main API routes 
-│  ├─ providers/                # Provider logic
-│  ├─ models.py                 # Database models 
-│  ├─ schemas.py                # Pydantic schemas
-│  ├─ auth/                     # JWT authentication logic
-│  └─ requirements.txt          # Python dependencies
+├─ backend-express/                     
+│  ├─ package-lock.json                  
+│  ├─ package.json               
+│  ├─ requirements.txt              
+│  ├─ server.js              
 ├─ frontend/                    # React + Vite frontend
 │  ├─ src/components/           # UI components
 │  ├─ src/hooks/                # Custom React hooks
 │  ├─ src/api/                  # API client
-│  └─ package.json              # Node dependencies
-├─ docker-compose.yml           # Postgres setup
-├─ env.example                  # Env template
-└─ .github/workflows/deploy.yml # CI/CD workflow
+│  ├─ src/App.jsx
+|  ├─ src/index.css
+|  ├─ src/main.jsx
+|  ├─ src/style.css
+|  ├─ index.html
+|  ├─  package.json      
+├─ docker-compose.yml          
+
 ```
 ---
 ## 🎯 Assignment Requirements
