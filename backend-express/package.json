@@ -1,17 +1,25 @@
 {
-  "name": "chatbot-backend-express",
-  "version": "1.0.0",
-  "type": "module",
+  "name": "chatbot-frontend",
+  "private": true,
+  "version": "0.1.0",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "build": "echo 'no build step needed'"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 5173"
   },
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
-    "express": "^4.21.2",
-    "openai": "^4.20.1"
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.542.0",
+    "marked": "12.0.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.12",
+    "@vitejs/plugin-react": "4.3.1",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.12",
+    "vite": "5.4.2"
   }
 }
