@@ -1,206 +1,162 @@
-# Chatbot Capstone - Full-Stack AI Chatbot
+# 🤖 AI-BOT 
 
-A production-ready, full-stack chatbot with **SSE streaming**, **session persistence**, and **multi-provider model switching**.
+A cutting-edge, full-stack chatbot platform featuring  **real-time streaming**, **authentication**, **database persistence**, and **multi-model provider support**.
 
-## 🚀 Features
+---
 
-- **Real-time streaming** responses with token-by-token display
-- **Session management** with persistent chat history
-- **Multi-provider support**: OpenAI, Anthropic, Gemini, Ollama (BONUS)
-- **Modern React UI** with ChatGPT-like interface
-- **FastAPI backend** with async streaming endpoints
-- **Postgres database** for data persistence
-- **Rate limiting** and token caps for cost control
+## ✨ Core Features
 
-## 🏗️ Architecture
+- ⚡ **Live Streaming**: Token-by-token response rendering via SSE  
+- 🔑 **Authentication**: JWT-based login & session handling  
+- 💾 **Database Integration**: Postgres with SQLAlchemy ORM  
+- 🔄 **Session Persistence**: Store & retrieve chat history  
+- 🌐 **Multi-Provider Switching**: OpenAI, Anthropic, Gemini 
+- 🎨 **Modern UI**: React + Vite frontend styled like ChatGPT  
+- 📊 **Rate Limiting**: Configurable token caps for cost control  
 
-```
-Frontend (React + Vite) ←→ Backend (FastAPI) ←→ AI Providers
-                              ↓
-                        Postgres Database
-```
+---
 
-## 📦 Quick Start
+## 🏛 Architecture Overview
 
-### 1. Clone & Setup
-```bash
-git clone <your-repo>
-cd chatbot-capstone
+```txt
+Frontend (React + Vite) ⇄ Backend (FastAPI) ⇄ AI Providers
+                                   ↓
+
+                            Postgres Database
 ```
 
-### 2. Backend Setup
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-```
+---
 
-### 3. Database Setup
-```bash
-# Start Postgres (from project root)
-docker compose up -d
+## 🚀 Quick Start
 
-# Or use your own Postgres instance
-# Update DATABASE_URL in .env
-```
+- 1️⃣ Clone & Setup
+  ``` bash
+    git clone <your-repo>
+    cd AI-BOT
+  ```
+- 2️⃣ Backend Setup
+  ``` bash
+     cd backend-express
+     python -m venv .venv
+     source .venv/bin/activate     # On Windows: .venv\Scripts\activate
+     pip install -r requirements.txt
+  ```
 
-### 4. Environment Configuration
-```bash
-# Copy and fill your API keys
-cp env.example .env
-# Edit .env with your actual API keys
-```
+- 3️⃣ Database Setup
+## Start Postgres using Docker
+ ``` bash
+     docker compose up -d
+ ```
 
-### 5. Start Backend
-```bash
-cd backend
-export PYTHONPATH=.
-uvicorn app:app --host 0.0.0.0 --port 8000 --reload
-```
+### OR connect to your own Postgres instance
+### Remember to update DATABASE_URL in .env
 
-### 6. Start Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
+- 4️⃣ Configure Environment
+  ``` bash
+      cp env.example .env
+  ```
+### Fill in your API keys and database credentials
 
-Visit: http://localhost:5173
+- 5️⃣ Start Backend Server
+  ``` bash 
+      cd backend-express
+      uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+  ```
 
-## 🔧 Configuration
+- 6️⃣ Start Frontend
+  ``` bash
+      cd frontend
+      npm install
+      npm run dev
+  ```
 
-### Environment Variables
-- `OPENAI_API_KEY`: Your OpenAI API key
-- `ANTHROPIC_API_KEY`: Your Anthropic API key  
-- `GEMINI_API_KEY`: Your Google Gemini API key
-- `OLLAMA_BASE_URL`: Local Ollama instance (optional)
-- `DATABASE_URL`: Postgres connection string
-- `MAX_OUTPUT_TOKENS`: Token limit (default: 1024)
+## 👉 Open your browser at: http://localhost:5173
 
-### AI Providers
-- **OpenAI**: GPT-4o-mini, GPT-4o-mini-translate
-- **Anthropic**: Claude 3.5 Haiku
-- **Gemini**: Gemini 1.5 Flash
-- **Ollama**: Local models (llama3, phi3, qwen2)
+- ⚙️ Configuration
+- 🔑 Environment Variables
+
+    - OPENAI_API_KEY — OpenAI credentials
+
+    - ANTHROPIC_API_KEY — Anthropic Claude API key
+
+    - GEMINI_API_KEY — Google Gemini key
+
+    - MAX_OUTPUT_TOKENS — Token limit per response
+
+- 🤝 Supported Providers
+
+   - OpenAI: GPT-4o-mini, GPT-4o-translate
+
+   - Anthropic: Claude 3.5 Haiku
+
+   - Gemini: Gemini 1.5 Flash
+
+
+- 🔐 Authentication
+
+  - Login: POST /auth/login → { email, password }
+
+  - Verify: GET /auth/verify → Token validation
+
+   - Frontend Integration: Token stored in localStorage, sent with every request (Authorization: Bearer <token>).
+
+---
 
 ## 🧪 Testing
 
-### Test SSE Streaming
-```bash
+## SSE Chat Stream
+``` bash
 curl -N -H "Accept: text/event-stream" \
   -H "Content-Type: application/json" \
   -d '{"messages":[{"role":"user","content":"Hello!"}],"provider":"openai","model":"gpt-4o-mini"}' \
   http://localhost:8000/chat/<session_id>/stream
 ```
-
-### API Endpoints
-- `GET /models` - Available providers and models
-- `POST /sessions` - Create new chat session
-- `GET /sessions` - List user sessions
-- `GET /sessions/{id}` - Get session messages
-- `POST /chat/{id}/stream` - Stream chat responses (SSE)
-
-## 🎯 Assignment Requirements
-
-This boilerplate covers all **mandatory requirements**:
-
-✅ **SSE Streaming** - Real-time token-by-token responses  
-✅ **Session Management** - Users, sessions, message persistence  
-✅ **Multi-Provider Switching** - OpenAI + Anthropic/Gemini  
-✅ **Modern UI/UX** - ChatGPT-like interface  
-✅ **Database Persistence** - Postgres with SQLAlchemy  
-✅ **Rate Limiting** - Configurable token caps  
-✅ **Environment Security** - .env for API keys  
-
-## 🚀 Deployment
-
-### Local Development
-- Backend: `uvicorn app:app --reload`
-- Frontend: `npm run dev`
-- Database: `docker compose up -d`
-
-### Production Build
-```bash
-# Frontend
-cd frontend
-npm run build
-
-# Backend
-cd backend
-uvicorn app:app --host 0.0.0.0 --port 8000
-```
-
-## 🔍 Project Structure
-
-```
-chatbot-capstone/
-├─ backend/                 # FastAPI application
-│  ├─ app.py              # Main API endpoints
-│  ├─ providers/          # AI provider implementations
-│  ├─ models.py           # Database models
-│  ├─ schemas.py          # Pydantic schemas
-│  └─ requirements.txt    # Python dependencies
-├─ frontend/              # React application
-│  ├─ src/
-│  │  ├─ components/      # React components
-│  │  ├─ hooks/          # Custom hooks (useSSE)
-│  │  └─ api/            # API client
-│  └─ package.json       # Node dependencies
-├─ docker-compose.yml     # Postgres setup
-└─ env.example           # Environment template
-```
-
-## 🎉 Bonus Features
-
-- **Ollama Integration**: Local OSS models
-- **Markdown Rendering**: Rich message display
-- **Copy to Clipboard**: Easy message copying
-- **Responsive Design**: Mobile-friendly interface
-
-## 📚 Next Steps
-
-1. **Customize UI**: Modify colors, fonts, layout
-2. **Add Features**: File uploads, code highlighting
-3. **Enhance Security**: User authentication, rate limiting
-4. **Deploy**: AWS, Vercel, or your preferred platform
-
 ---
 
-**Happy Coding! 🚀**
+## API Endpoints
 
-This boilerplate gives you a solid foundation to build upon. All the complex parts (SSE, providers, database) are already implemented - focus on your unique features and polish!
+ - GET /models → List providers & models
 
-## CI / CD (GitHub Actions)
+ - POST /sessions → Create a new chat session
 
-This repository includes a sample GitHub Actions workflow `.github/workflows/deploy.yml` that builds and pushes Docker images to Docker Hub and then SSHes to a target server to pull images and run `docker compose -f docker-compose.deploy.yml up -d`.
+ - GET /sessions → Retrieve all sessions
 
-To use it:
+ - GET /sessions/{id} → Load chat history
 
-1. Add the following repository secrets: `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`, `SSH_HOST`, `SSH_USER`, `SSH_PRIVATE_KEY`.
-2. Ensure `docker-compose.deploy.yml` exists on the server or include it in this repo. The workflow expects the server to have `docker` and `docker compose` installed.
+ - POST /chat/{id}/stream → Stream AI responses
+   
+---
+## 🗂 Project Structure
+ai-bot/
+├─ backend/                     # FastAPI backend 
+│  ├─ app.py                    # Main API routes 
+│  ├─ providers/                # Provider logic
+│  ├─ models.py                 # Database models 
+│  ├─ schemas.py                # Pydantic schemas
+│  ├─ auth/                     # JWT authentication logic
+│  └─ requirements.txt          # Python dependencies
+├─ frontend/                    # React + Vite frontend
+│  ├─ src/components/           # UI components
+│  ├─ src/hooks/                # Custom React hooks
+│  ├─ src/api/                  # API client
+│  └─ package.json              # Node dependencies
+├─ docker-compose.yml           # Postgres setup
+├─ env.example                  # Env template
+└─ .github/workflows/deploy.yml # CI/CD workflow
 
-### Deploy to a Linux VM (example)
+---
+## 🎯 Assignment Requirements
 
-1. Clone repo on the server in `~/chatbot-deploy`.
-2. Place a `.env` with `OPENAI_API_KEY`, `GEMINI_API_KEY`, and `POSTGRES_*` values.
-3. Start services:
+### This project meets all mandatory requirements:
 
-```bash
-cd ~/chatbot-deploy
-docker compose -f docker-compose.deploy.yml up -d --build
-```
+- ✅ SSE Streaming — Real-time token-by-token responses
+- ✅ Session Management — User sessions & persistent history
+- ✅ Multi-Provider Switching — OpenAI + Anthropic/Gemini/Ollama
+- ✅ Modern UI/UX — ChatGPT-like React interface
+- ✅ Database Persistence — Postgres with SQLAlchemy
+- ✅ Authentication — JWT-based login & token verification
+- ✅ Rate Limiting — Configurable token caps
+- ✅ Environment Security — .env for API keys
 
-4. Optionally create a systemd service (example in `deploy/nginx.service`) to ensure the compose stack starts on boot.
 
-## Authentication
-
-This project includes a simple JWT-based auth on the backend. Endpoints:
-
-- `POST /auth/login` — accepts `{ email, password }` and returns `{ token, user }`.
-- `GET /auth/verify` — verifies a token sent in `Authorization: Bearer <token>`.
-
-The frontend `Auth` page calls `/auth/login` and stores the token in `localStorage`. All subsequent API calls include the token in the `Authorization` header.
-
-Important: The current login implementation is a demo (no password checks, no user DB). Replace it with a real user/password system before production.
-
+⚠️ Current login is demo-only (no user DB/password hashing). Replace with a secure system before production.
